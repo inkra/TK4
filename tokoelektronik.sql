@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 17 Jan 2024 pada 15.47
--- Versi server: 10.4.21-MariaDB
--- Versi PHP: 8.1.6
+-- Generation Time: Jan 19, 2024 at 07:27 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `Barang`
+-- Table structure for table `Barang`
 --
 
 CREATE TABLE `Barang` (
@@ -33,10 +33,10 @@ CREATE TABLE `Barang` (
   `Keterangan` varchar(255) DEFAULT NULL,
   `Satuan` varchar(50) DEFAULT NULL,
   `IdSupplier` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `Barang`
+-- Dumping data for table `Barang`
 --
 
 INSERT INTO `Barang` (`IdBarang`, `NamaBarang`, `Keterangan`, `Satuan`, `IdSupplier`) VALUES
@@ -55,17 +55,17 @@ INSERT INTO `Barang` (`IdBarang`, `NamaBarang`, `Keterangan`, `Satuan`, `IdSuppl
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `HakAkses`
+-- Table structure for table `HakAkses`
 --
 
 CREATE TABLE `HakAkses` (
   `IdAkses` int(11) NOT NULL,
   `NamaAkses` varchar(255) NOT NULL,
   `Keterangan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `HakAkses`
+-- Dumping data for table `HakAkses`
 --
 
 INSERT INTO `HakAkses` (`IdAkses`, `NamaAkses`, `Keterangan`) VALUES
@@ -78,7 +78,7 @@ INSERT INTO `HakAkses` (`IdAkses`, `NamaAkses`, `Keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `Pelanggan`
+-- Table structure for table `Pelanggan`
 --
 
 CREATE TABLE `Pelanggan` (
@@ -86,10 +86,10 @@ CREATE TABLE `Pelanggan` (
   `NamaPelanggan` varchar(255) DEFAULT NULL,
   `NoHpPelanggan` varchar(15) DEFAULT NULL,
   `AlamatPelanggan` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `Pelanggan`
+-- Dumping data for table `Pelanggan`
 --
 
 INSERT INTO `Pelanggan` (`IdPelanggan`, `NamaPelanggan`, `NoHpPelanggan`, `AlamatPelanggan`) VALUES
@@ -117,7 +117,7 @@ INSERT INTO `Pelanggan` (`IdPelanggan`, `NamaPelanggan`, `NoHpPelanggan`, `Alama
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `Pembelian`
+-- Table structure for table `Pembelian`
 --
 
 CREATE TABLE `Pembelian` (
@@ -125,34 +125,35 @@ CREATE TABLE `Pembelian` (
   `JumlahPembelian` int(11) NOT NULL,
   `HargaBeli` decimal(10,2) NOT NULL,
   `IdPengguna` int(11) DEFAULT NULL,
-  `IdPelanggan` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `IdPelanggan` int(11) DEFAULT NULL,
+  `IdBarang` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `Pembelian`
+-- Dumping data for table `Pembelian`
 --
 
-INSERT INTO `Pembelian` (`IdPembelian`, `JumlahPembelian`, `HargaBeli`, `IdPengguna`, `IdPelanggan`) VALUES
-(31, 5, '100000.00', 1, 1),
-(32, 8, '150000.00', 2, 2),
-(33, 10, '200000.00', 3, 3),
-(34, 7, '120000.00', 1, 1),
-(35, 12, '180000.00', 2, 2),
-(36, 9, '160000.00', 3, 3),
-(37, 6, '110000.00', 1, 1),
-(38, 11, '190000.00', 2, 2),
-(39, 4, '130000.00', 3, 3),
-(40, 15, '250000.00', 1, 1),
-(41, 8, '170000.00', 2, 2),
-(42, 9, '200000.00', 3, 3),
-(43, 5, '140000.00', 1, 1),
-(44, 13, '220000.00', 2, 2),
-(45, 7, '160000.00', 3, 3);
+INSERT INTO `Pembelian` (`IdPembelian`, `JumlahPembelian`, `HargaBeli`, `IdPengguna`, `IdPelanggan`, `IdBarang`) VALUES
+(31, 5, 100000.00, 1, 1, 2),
+(32, 8, 150000.00, 2, 2, 7),
+(33, 10, 200000.00, 3, 3, 4),
+(34, 7, 120000.00, 1, 1, 1),
+(35, 12, 180000.00, 2, 2, 8),
+(36, 9, 160000.00, 3, 3, 11),
+(37, 6, 110000.00, 1, 1, 3),
+(38, 11, 190000.00, 2, 2, 3),
+(39, 4, 130000.00, 3, 3, 9),
+(40, 15, 250000.00, 1, 1, 10),
+(41, 8, 170000.00, 2, 2, 11),
+(42, 9, 200000.00, 3, 3, 7),
+(43, 5, 140000.00, 1, 1, 6),
+(44, 13, 220000.00, 2, 2, 3),
+(45, 7, 160000.00, 3, 3, 10);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `Pengguna`
+-- Table structure for table `Pengguna`
 --
 
 CREATE TABLE `Pengguna` (
@@ -164,10 +165,10 @@ CREATE TABLE `Pengguna` (
   `NoHP` varchar(20) DEFAULT NULL,
   `Alamat` varchar(255) DEFAULT NULL,
   `IdAkses` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `Pengguna`
+-- Dumping data for table `Pengguna`
 --
 
 INSERT INTO `Pengguna` (`IdPengguna`, `NamaPengguna`, `Password`, `NamaDepan`, `NamaBelakang`, `NoHP`, `Alamat`, `IdAkses`) VALUES
@@ -192,46 +193,47 @@ INSERT INTO `Pengguna` (`IdPengguna`, `NamaPengguna`, `Password`, `NamaDepan`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `Penjualan`
+-- Table structure for table `Penjualan`
 --
 
 CREATE TABLE `Penjualan` (
   `IdPenjualan` int(11) NOT NULL,
   `JumlahPenjualan` int(11) NOT NULL,
   `HargaJual` decimal(10,2) NOT NULL,
-  `IdPengguna` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `IdPengguna` int(11) DEFAULT NULL,
+  `IdBarang` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `Penjualan`
+-- Dumping data for table `Penjualan`
 --
 
-INSERT INTO `Penjualan` (`IdPenjualan`, `JumlahPenjualan`, `HargaJual`, `IdPengguna`) VALUES
-(1, 1, '20000000.00', 7),
-(2, 1, '15000000.00', 7),
-(3, 2, '40000000.00', 7),
-(4, 1, '12000000.00', 7),
-(5, 1, '18000000.00', 7),
-(6, 1, '20000000.00', 7),
-(7, 1, '23000000.00', 8),
-(8, 1, '24000000.00', 8),
-(9, 1, '25000000.00', 8),
-(10, 1, '15000000.00', 8),
-(11, 1, '12000000.00', 8),
-(12, 1, '25000000.00', 7),
-(13, 1, '23000000.00', 7),
-(14, 2, '40000000.00', 7),
-(15, 1, '15000000.00', 7),
-(16, 2, '30000000.00', 8),
-(17, 1, '15000000.00', 8),
-(18, 1, '17000000.00', 8),
-(19, 1, '23000000.00', 7),
-(20, 2, '18000000.00', 7);
+INSERT INTO `Penjualan` (`IdPenjualan`, `JumlahPenjualan`, `HargaJual`, `IdPengguna`, `IdBarang`) VALUES
+(1, 1, 20000000.00, 7, 8),
+(2, 1, 15000000.00, 7, 2),
+(3, 2, 40000000.00, 7, 3),
+(4, 1, 12000000.00, 7, 1),
+(5, 1, 18000000.00, 7, 6),
+(6, 1, 20000000.00, 7, 7),
+(7, 1, 23000000.00, 8, 10),
+(8, 1, 24000000.00, 8, 7),
+(9, 1, 25000000.00, 8, 4),
+(10, 1, 15000000.00, 8, 6),
+(11, 1, 12000000.00, 8, 7),
+(12, 1, 25000000.00, 7, 10),
+(13, 1, 23000000.00, 7, 4),
+(14, 2, 40000000.00, 7, 4),
+(15, 1, 15000000.00, 7, 5),
+(16, 2, 30000000.00, 8, 2),
+(17, 1, 15000000.00, 8, 1),
+(18, 1, 17000000.00, 8, 8),
+(19, 1, 23000000.00, 7, 10),
+(20, 2, 18000000.00, 7, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `Suppliers`
+-- Table structure for table `Suppliers`
 --
 
 CREATE TABLE `Suppliers` (
@@ -239,10 +241,10 @@ CREATE TABLE `Suppliers` (
   `NamaSupplier` varchar(255) DEFAULT NULL,
   `NoHpSupplier` varchar(15) DEFAULT NULL,
   `AlamatSupplier` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `Suppliers`
+-- Dumping data for table `Suppliers`
 --
 
 INSERT INTO `Suppliers` (`IdSupplier`, `NamaSupplier`, `NoHpSupplier`, `AlamatSupplier`) VALUES
@@ -262,93 +264,97 @@ INSERT INTO `Suppliers` (`IdSupplier`, `NamaSupplier`, `NoHpSupplier`, `AlamatSu
 --
 
 --
--- Indeks untuk tabel `Barang`
+-- Indexes for table `Barang`
 --
 ALTER TABLE `Barang`
   ADD PRIMARY KEY (`IdBarang`),
   ADD KEY `barang_IdSupplier_to_Suppliers_IdSupplier` (`IdSupplier`);
 
 --
--- Indeks untuk tabel `HakAkses`
+-- Indexes for table `HakAkses`
 --
 ALTER TABLE `HakAkses`
   ADD PRIMARY KEY (`IdAkses`);
 
 --
--- Indeks untuk tabel `Pelanggan`
+-- Indexes for table `Pelanggan`
 --
 ALTER TABLE `Pelanggan`
   ADD PRIMARY KEY (`IdPelanggan`);
 
 --
--- Indeks untuk tabel `Pembelian`
+-- Indexes for table `Pembelian`
 --
 ALTER TABLE `Pembelian`
   ADD PRIMARY KEY (`IdPembelian`),
   ADD KEY `FK_Pembelian_Pengguna` (`IdPengguna`),
-  ADD KEY `fk_Pembelian_Pelanggan` (`IdPelanggan`);
+  ADD KEY `fk_Pembelian_Pelanggan` (`IdPelanggan`),
+  ADD KEY `idBarang` (`IdBarang`);
 
 --
--- Indeks untuk tabel `Pengguna`
+-- Indexes for table `Pengguna`
 --
 ALTER TABLE `Pengguna`
   ADD PRIMARY KEY (`IdPengguna`),
   ADD KEY `FK_Pengguna_HakAkses` (`IdAkses`);
 
 --
--- Indeks untuk tabel `Penjualan`
+-- Indexes for table `Penjualan`
 --
 ALTER TABLE `Penjualan`
   ADD PRIMARY KEY (`IdPenjualan`),
-  ADD KEY `FK_Penjualan_Pengguna` (`IdPengguna`);
+  ADD KEY `FK_Penjualan_Pengguna` (`IdPengguna`),
+  ADD KEY `idBarang` (`IdBarang`);
 
 --
--- Indeks untuk tabel `Suppliers`
+-- Indexes for table `Suppliers`
 --
 ALTER TABLE `Suppliers`
   ADD PRIMARY KEY (`IdSupplier`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `Pembelian`
+-- AUTO_INCREMENT for table `Pembelian`
 --
 ALTER TABLE `Pembelian`
   MODIFY `IdPembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `Barang`
+-- Constraints for table `Barang`
 --
 ALTER TABLE `Barang`
   ADD CONSTRAINT `barang_IdSupplier_to_Suppliers_IdSupplier` FOREIGN KEY (`IdSupplier`) REFERENCES `Suppliers` (`IdSupplier`);
 
 --
--- Ketidakleluasaan untuk tabel `Pembelian`
+-- Constraints for table `Pembelian`
 --
 ALTER TABLE `Pembelian`
   ADD CONSTRAINT `FK_Pembelian_Pengguna` FOREIGN KEY (`IdPengguna`) REFERENCES `Pengguna` (`IdPengguna`),
   ADD CONSTRAINT `fk_Pembelian_Pelanggan` FOREIGN KEY (`IdPelanggan`) REFERENCES `Pelanggan` (`IdPelanggan`),
-  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`IdPengguna`) REFERENCES `Pengguna` (`IdPengguna`);
+  ADD CONSTRAINT `pembelian_ibfk_1` FOREIGN KEY (`IdPengguna`) REFERENCES `Pengguna` (`IdPengguna`),
+  ADD CONSTRAINT `pembelian_ibfk_2` FOREIGN KEY (`idBarang`) REFERENCES `Barang` (`IdBarang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `Pengguna`
+-- Constraints for table `Pengguna`
 --
 ALTER TABLE `Pengguna`
   ADD CONSTRAINT `FK_Pengguna_HakAkses` FOREIGN KEY (`IdAkses`) REFERENCES `HakAkses` (`IdAkses`),
   ADD CONSTRAINT `pengguna_ibfk_1` FOREIGN KEY (`IdAkses`) REFERENCES `HakAkses` (`IdAkses`);
 
 --
--- Ketidakleluasaan untuk tabel `Penjualan`
+-- Constraints for table `Penjualan`
 --
 ALTER TABLE `Penjualan`
   ADD CONSTRAINT `FK_Penjualan_Pengguna` FOREIGN KEY (`IdPengguna`) REFERENCES `Pengguna` (`IdPengguna`),
-  ADD CONSTRAINT `penjualan_ibfk_1` FOREIGN KEY (`IdPengguna`) REFERENCES `Pengguna` (`IdPengguna`);
+  ADD CONSTRAINT `penjualan_ibfk_1` FOREIGN KEY (`IdPengguna`) REFERENCES `Pengguna` (`IdPengguna`),
+  ADD CONSTRAINT `penjualan_ibfk_2` FOREIGN KEY (`idBarang`) REFERENCES `Barang` (`IdBarang`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
