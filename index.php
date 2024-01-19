@@ -10,6 +10,7 @@
 	use Controllers\Pengguna;
 	use Controllers\Barang;
 	use Controllers\PaketPenjualan;
+	use Controllers\Dashboard;
 
 	/**
 	 * Buat objek dari kelas Suppliers
@@ -201,4 +202,27 @@ if(!isset($_GET['actPaket'])) {
 					break;
 	}
 }
+
+$controller = new Dashboard();
+
+if(!isset($_GET['dashboard'])) {
+	// Pemanggilan method yang akan di-run
+	$controller->index();
+} else {
+	switch($_GET['dashboard']) {
+			case 'home': 
+					$controller->index();
+					break;
+
+			case 'tampil-data':
+					$controller->show_data();
+					break;
+
+			default: 
+					$controller->index();
+					break;
+	}
+}
+
+
 ?>
